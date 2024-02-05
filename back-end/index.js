@@ -74,7 +74,7 @@ async function main() {
       mongoose.set('strictQuery', false);
   
       // Connect to MongoDB Atlas using async/await
-      await mongoose.connect(`mongodb+srv://jitendranishadjava:UjedWtRUGd0CG0aD@cluster0.pff38ag.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+      await mongoose.connect(`mongourl`, { useNewUrlParser: true, useUnifiedTopology: true });
   
       console.log('Connected to MongoDB Atlas');
     } catch (error) {
