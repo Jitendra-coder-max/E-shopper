@@ -60,52 +60,101 @@ const Cart = new mongoose.model('Cart',cartSchema);
 const User = new mongoose.model('User',userSchema);
 const Order = new mongoose.model('Order',orderSchema);
 
-main().catch(err => console.log(err));
+// main().catch(err => console.log(err));
 
+// async function main() {
+//     await mongoose.connect('mongodb://localhost:27017/test');
+//     console.log('Server Connected');
+//     // Write Code Here
+// }
 async function main() {
-    await mongoose.connect('mongodb://localhost:27017/test');
-    console.log('Server Connected');
-    // Write Code Here
-}
+    try {
+  
+      // Set the 'strictQuery' option to suppress the deprecation warning
+      mongoose.set('strictQuery', false);
+  
+      // Connect to MongoDB Atlas using async/await
+      await mongoose.connect(`mongodb+srv://jitendranishadjava:UjedWtRUGd0CG0aD@cluster0.pff38ag.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+  
+      console.log('Connected to MongoDB Atlas');
+    } catch (error) {
+      console.error('Error connecting to MongoDB Atlas:', error);
+    }
+  }
+  
+  // Call the function to connect
+  main();
 
 
-// app.get('/createProduct',(req,res)=>{
-//     let product = new Product({
-//         id: 3,
-//         name: 'Apple iPhone 11',
-//         price: 799.75,
-//         category: 'Mobile',
-//         rating: 4,
-//         color: 'black',
-//         size: '',
-//         details: {
-//           product: '',
-//           warranty: '',
-//           merchant: '',
-//         },
-//         image: 'product-3-square',
-//         images: ['product-3', 'product-3-2', 'product-3-3'],
+app.get('/createProduct',(req,res)=>{
+    let product = new Product({
+        id: 3,
+        name: 'Apple iPhone 11',
+        price: 799.75,
+        category: 'Mobile',
+        rating: 4,
+        color: 'black',
+        size: '',
+        details: {
+          product: '',
+          warranty: '',
+          merchant: '',
+        },
+        image: 'product-3-square',
+        images: ['product-3', 'product-3-2', 'product-3-3'],
     
-//     })
-//     product.save().then((success)=>{
-//         res.send(success)
-//     }).catch(err=>{
-//         res.error(err)
-//     })
+    },
+    {
+        id: 1,
+        name: 'Sony WX-5',
+        price: 100.75,
+        category: 'Headphones',
+        rating: 3,
+        color: 'red',
+        size: 'S',
+        details: {
+          product: '',
+          warranty: '',
+          merchant: '',
+        },
+        image: 'product-1-square',
+        images: ['product-1', 'product-1-2', 'product-1-3'],
+      },
+      {
+        id: 2,
+        name: 'Apple Watch 2',
+        price: 500.75,
+        category: 'SmartWatch',
+        rating: 4,
+        color: 'black',
+        size: '',
+        details: {
+          product: '',
+          warranty: '',
+          merchant: '',
+        },
+        image: 'product-2-square',
+        images: ['product-2', 'product-2-2', 'product-2-3'],
+      })
+    product.save().then((success)=>{
+        res.send(success)
+    }).catch(err=>{
+        res.error(err)
+    })
 
     
-// })
-// app.get('/createUser',(req,res)=>{
-//    let user = new User({
-//        name : 'John',
-//        email: 'demo@example.com',
-//        orders: [],
-//        addresses:[]
-//    });
-//    user.save().then(usr=>{
-//        res.send(usr)
-//    })
-// });
+})
+app.get('/createUser',(req,res)=>{
+   let user = new User({
+       name : 'John',
+       email: 'demo@example.com',
+       orders: [],
+       addresses:[]
+   });
+   user.save().then(usr=>{
+       res.send(usr)
+   })
+});
 
 app.post('/login',(req,res)=>{
     console.log(req.body.user);
